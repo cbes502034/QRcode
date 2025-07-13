@@ -128,7 +128,7 @@
   <div id="popup">
     <span id="close-popup" onclick="closePopup()">×</span>
     <h3>請掃描 QR Code 以啟用驗證器</h3>
-    <img id="qrcode" alt="QR Code">
+    <!--<img id="qrcode" alt="QR Code">-->
     <p>請輸入手機 App 顯示的 6 位數驗證碼：</p>
     <input type="text" id="totp" placeholder="輸入驗證碼">
     <button onclick="totp();">送出驗證</button>
@@ -160,7 +160,8 @@
 
       if (response.status) {
         document.getElementById("popup").style.display = "block";
-        document.getElementById("qrcode").src = response.qrcode;
+        //document.getElementById("qrcode").src = response.qrcode;
+        console.log(response.qrcode);
         email = mail;
         account = acc;
         password = pass;
