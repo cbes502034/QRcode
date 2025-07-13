@@ -128,7 +128,7 @@
   <div id="popup">
     <span id="close-popup" onclick="closePopup()">×</span>
     <h3>請掃描 QR Code 以啟用驗證器</h3>
-    <!--<img id="qrcode" alt="QR Code">-->
+    <img id="qrcode" alt="QR Code">
     <p>請輸入手機 App 顯示的 6 位數驗證碼：</p>
     <input type="text" id="totp" placeholder="輸入驗證碼">
     <button onclick="totp();">送出驗證</button>
@@ -140,54 +140,27 @@
     let password = "";
 
     async function login() {
-  const mail = document.getElementById("email").value;
-  const acc = document.getElementById("account").value;
-  const pass = document.getElementById("password").value;
+      const mail = document.getElementById("email").value;
+      const acc = document.getElementById("account").value;
+      const pass = document.getElementById("password").value;
 
-  try {
-    let response = await fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "email": mail,
-        "account": acc,
-        "password": pass
-      })
-    });
-
-    if (!response.ok) {
-      const text = await response.text(); // 把錯誤訊息抓出來
-      console.error("伺服器回應錯誤：", text);
-      alert("伺服器錯誤（" + response.status + "），請稍後再試。");
-      return;
-    }
-
-    const data = await response.json();
-    console.log("oh~ya~");
-
-    if (data.status) {
-      document.getElementById("popup").style.display = "block";
-      console.log(data.qrcode);
-      email = mail;
-      account = acc;
-      password = pass;
-    } else {
-      alert("登入失敗，請檢查帳密。");
-    }
-  } catch (err) {
-    console.error("解析 JSON 發生錯誤：", err);
-    alert("系統異常，請稍後再試。");
-  }
-}
+      let response = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "email": mail,
+          "account": acc,
+          "password": pass
+        })
+      });
 
       response = await response.json();
-      console.log("oh~ya~");
+
       if (response.status) {
         document.getElementById("popup").style.display = "block";
-        //document.getElementById("qrcode").src = response.qrcode;
-        console.log(response.qrcode);
+        document.getElementById("qrcode").src = response.qrcode;
         email = mail;
         account = acc;
         password = pass;
