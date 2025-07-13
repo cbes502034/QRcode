@@ -61,4 +61,4 @@ async def LoginTotp(request:Request):
         return JSONResponse({"status":True})
     else:
         return JSONResponse({"status":False})
-qr.mount("/",StaticFiles(directory="qrcode",html=True))
+qr.mount("/",StaticFiles(directory="web",html=True))
