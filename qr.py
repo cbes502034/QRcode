@@ -10,10 +10,10 @@ from dotenv import load_dotenv
 
 KEY = "KEY"
 qr = FastAPI()
-sql = SQL(USER = os.getenv("MYSQLUSER")
-          PASSWORD = os.getenv("MYSQLPASSWORD")
-          HOST = os.getenv("MYSQLHOST")
-          PORT = int(os.getenv("MYSQLPORT"))
+sql = SQL(USER = os.getenv("MYSQLUSER"),
+          PASSWORD = os.getenv("MYSQLPASSWORD"),
+          HOST = os.getenv("MYSQLHOST"),
+          PORT = int(os.getenv("MYSQLPORT")),
           DATABASE = os.getenv("MYSQLDATABASE"))
 
 def TotpAuthenticatorObject(secret,CODE=False):
