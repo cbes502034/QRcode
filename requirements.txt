@@ -4,3 +4,4 @@ pymysql
 itsdangerous
 python-multipart
 python-dotenv
+pyotp
