@@ -8,9 +8,9 @@ from Image import IMG
 import pyotp
 import os
 from dotenv import load_dotenv
-
 KEY = "KEY"
 qr = FastAPI()
+load_dotenv()
 sql = SQL(USER = os.getenv("MYSQLUSER"),
           PASSWORD = os.getenv("MYSQLPASSWORD"),
           HOST = os.getenv("MYSQLHOST"),
