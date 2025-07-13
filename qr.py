@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from MySql.mysql import SQL
 from Image import IMG
 import pyotp
+import os
 from dotenv import load_dotenv
 
 KEY = "KEY"
