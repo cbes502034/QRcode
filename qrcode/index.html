@@ -143,7 +143,9 @@
       const mail = document.getElementById("email").value;
       const acc = document.getElementById("account").value;
       const pass = document.getElementById("password").value;
-
+      console.log(mail);
+      console.log(acc);
+      console.log(pass);
       let response = await fetch("/login", {
         method: "POST",
         headers: {
