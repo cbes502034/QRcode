@@ -6,13 +6,15 @@ from fastapi.staticfiles import StaticFiles
 from MySql.mysql import SQL
 from Image import IMG
 import pyotp
+from dotenv import load_dotenv
+
 KEY = "KEY"
 qr = FastAPI()
-sql = SQL(USER = "root",
-          PASSWORD = "wrTejwGDvnEFmGAkDkyHiENMBlAorNxb",
-          HOST = "shuttle.proxy.rlwy.net",
-          PORT = 11075,
-          DATABASE = "QRcode")
+sql = SQL(USER = os.getenv("MYSQLUSER")
+          PASSWORD = os.getenv("MYSQLPASSWORD")
+          HOST = os.getenv("MYSQLHOST")
+          PORT = int(os.getenv("MYSQLPORT"))
+          DATABASE = os.getenv("MYSQLDATABASE"))
 
 def TotpAuthenticatorObject(secret,CODE=False):
     obj = pyotp.TOTP(secret)
