@@ -13,7 +13,7 @@ KEY = "KEY"
 qr = FastAPI()
 
 load_dotenv()
-url = urlparse(os.MySqlPublicUrl)
+url = urlparse(os.getenv("MySqlPublicUrl"))
 sql = SQL(USER = url.username,
           PASSWORD = url.password,
           HOST = url.hostname,
@@ -65,4 +65,5 @@ async def LoginTotp(request:Request):
     else:
         return JSONResponse({"status":False})
 qr.mount("/",StaticFiles(directory="web",html=True))
+
 
