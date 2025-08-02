@@ -8,14 +8,17 @@ from Image import IMG
 import pyotp
 import os
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 KEY = "KEY"
 qr = FastAPI()
+
 load_dotenv()
-sql = SQL(USER = os.getenv("MYSQLUSER"),
-          PASSWORD = os.getenv("MYSQLPASSWORD"),
-          HOST = os.getenv("MYSQLHOST"),
-          PORT = int(os.getenv("MYSQLPORT")),
-          DATABASE = os.getenv("MYSQLDATABASE"))
+url = urlparse(os.MySqlPublicUrl)
+sql = SQL(USER = url.username,
+          PASSWORD = url.password,
+          HOST = url.hostname,
+          PORT = url.port,
+          DATABASE = url.path.lstrip("/"))
 
 def TotpAuthenticatorObject(secret,CODE=False):
     obj = pyotp.TOTP(secret)
@@ -62,3 +65,4 @@ async def LoginTotp(request:Request):
     else:
         return JSONResponse({"status":False})
 qr.mount("/",StaticFiles(directory="web",html=True))
+
