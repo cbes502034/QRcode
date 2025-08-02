@@ -18,7 +18,7 @@ sql = SQL(USER = url.username,
           PASSWORD = url.password,
           HOST = url.hostname,
           PORT = url.port,
-          DATABASE = os.getenv("DATABASE"))
+          DATABASE = url.path.lstrip("/"))
 
 def TotpAuthenticatorObject(secret,CODE=False):
     obj = pyotp.TOTP(secret)
@@ -65,6 +65,7 @@ async def LoginTotp(request:Request):
     else:
         return JSONResponse({"status":False})
 qr.mount("/",StaticFiles(directory="web",html=True))
+
 
 
 
